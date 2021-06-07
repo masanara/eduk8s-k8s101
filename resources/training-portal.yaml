@@ -1,0 +1,13 @@
+apiVersion: training.eduk8s.io/v1alpha1
+kind: TrainingPortal
+metadata:
+  name: k8s101
+spec:
+  portal:
+    registration:
+      type: anonymous
+  workshops:
+  - name: k8s101
+    capacity: 5
+    expires: 60m
+    orphaned: 5m

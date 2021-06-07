@@ -1,0 +1,30 @@
+modules:
+    workshop-overview:
+        name: Workshop Overview
+    exercise/01-kubernetes:
+        name: kubernetesとは
+    exercises/02-components:
+        name: kubernetsのコンポーネント
+    exercises/03-resources:
+        name: kubernetesのリソース
+    exercises/04-pod:
+        name: Podリソース
+    exercises/04-remove:
+        name: コンテナの削除
+    exercises/05-resources:
+        name: コンテナのリソース制限
+    exercises/06-background:
+        name: バックグラウンドでコンテナを起動する
+    exercises/07-host-network:
+        name: コンテナ向けネットワーク
+    exercises/08-volume:
+        name: コンテナのVolume
+    exercises/09-log:
+        name: コンテナのLog
+    exercises/10-build:
+        name: コンテナイメージのビルド
+    exercises/11-registry:
+        name: レジストリの利用
+    workshop-summary:
+        name: Workshop Summary
+        exit_sign: Finish Workshop

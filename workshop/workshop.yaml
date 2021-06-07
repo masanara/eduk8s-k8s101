@@ -1,0 +1,17 @@
+name: docker handson
+
+modules:
+    activate:
+    - workshop-overview
+    - exercises/01-kubernetes
+    - exercises/02-components
+    - exercises/03-resources
+    - exercises/04-pod
+    - exercises/05-resources
+    - exercises/06-background
+    - exercises/07-host-network
+    - exercises/08-volume
+    - exercises/09-log
+    - exercises/10-build
+    - exercises/11-registry
+    - workshop-summary
