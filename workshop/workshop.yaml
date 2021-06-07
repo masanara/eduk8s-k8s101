@@ -1,4 +1,4 @@
-name: docker handson
+name: kubernetes handson
 
 modules:
     activate:
@@ -7,11 +7,17 @@ modules:
     - exercises/02-components
     - exercises/03-resources
     - exercises/04-pod
-    - exercises/05-resources
-    - exercises/06-background
-    - exercises/07-host-network
-    - exercises/08-volume
-    - exercises/09-log
-    - exercises/10-build
-    - exercises/11-registry
+    - exercises/05-replicaset
+    - exercises/06-deployment
+    - exercises/07-daemonset
+    - exercises/08-statefulset
+#    - exercises/09-job
+#    - exercises/10-cronjob
+    - exercises/11-podnetwork
+    - exercises/12-service
+    - exercises/13-ingress
+    - exercises/14-configmap
+    - exercises/15-secret
+    - exercises/16-volume
+    - exercises/17-pvc
     - workshop-summary

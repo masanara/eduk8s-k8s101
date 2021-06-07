@@ -1,16 +1,22 @@
-### はじめに
+本ハンズオンではkubernetesに関する基本的な学習を行います。
 
-本ハンズオンではdockerによるコンテナのRun/Ship/Biuldの方法を学習します。
-
-- Dockerのインストール
-- コンテナイメージの取得
-- コンテナの起動
-- コンテナのネットワーク
-- コンテナの削除
-- コンテナのリソース制限
-- バックグラウンドでコンテナを起動する
-- コンテナ向けネットワーク
-- コンテナのVolume
-- コンテナのLog
-- コンテナイメージのビルド
-- レスストリの利用
+- Kubernertesとは
+- kubernetesのコンポーネント
+- Kubeernetesのリソース
+  - Pod
+  - ReplicaSet
+  - Deployment
+  - DaemonSet
+  - StatefulSet
+  - Job (作成中)
+  - CronJob (作成中)
+- Kubernetesのネットワーク
+  - Pod感通信 (作成中)
+  - Serviceリソース (作成中)
+  - Ingressリソース (作成中)
+- 各種情報の分離
+  - ConfigMapリソース (作成中)
+  - Secretリソース (作成中)
+- Kubernetesのストレージ
+  - Volumeマウント (作成中)
+  - PVC/PVリソース (作成中)

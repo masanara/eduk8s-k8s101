@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx
+      image: quay.io/mnara/nginx:1.20
+      volumeMounts:
+      - mountPath: "/home/share"
+        name: shared-dir
+    - name: shell
+      image: quay.io/mnara/utils:1.0
+      volumeMounts:
+      - mountPath: "/home/share"
+        name: shared-dir
+  volumes:
+    - name: shared-dir
+      emptyDir: {}
+
