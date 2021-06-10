@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: message
 data:
-  MESSAGE: "hello world!"
+  MESSAGE: "hello, world!"

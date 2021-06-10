@@ -19,7 +19,7 @@ kubectl apply -f message.yaml
 
 
 ```
-kubectl create configmap message --from-literal=MESSAGE='hello world!'
+kubectl create configmap message --from-literal=MESSAGE='hello, world!'
 ```
 
 ConfigMapが作成されたことを確認します。
@@ -31,7 +31,7 @@ kubectl get configmap
 ConfigMapを利用するPodを作成します。マニフェストを確認します。
 
 ```execute
-cat cm-pod.yaml
+cat cm-env.yaml
 ```
 
 このマニフェストでは、ubuntuイメージを利用して起動後に ```sleep 3600``` を実行するだけのシンプルなPodを作成します。 ```envFrom``` としてConfigMapを参照しているため、環境変数としてConfigMapの内容を環境変数として参照することが可能です。
@@ -48,7 +48,7 @@ kubectl exec cm-env -- bash -c 'echo ${MESSAGE}'
 
 kubectl patchコマンドでConfigMapのデータを変更します。
 
-```
+```execute
 kubectl patch cm message -p '{"data":{"MESSAGE": "HELLO, WORLD!"}}'
 ```
 
@@ -94,12 +94,12 @@ kubectl get pod
 作成したcm-vol Pod内の/etc/config/MESSAGEファイルが作成されており、内容を確認するとConfigMapで指定したメッセージが表示されます。
 
 ```execute
-kubectl exec cm-test -- bash -c 'cat /etc/config/MESSAGE'
+kubectl exec cm-vol -- bash -c 'cat /etc/config/MESSAGE'
 ```
 
 最後にモジュールで作成したリソースをすべて削除します。
 
 ```execute
-kubectl delete -f .
+kubectl delete -f . --force --grace-period=0
 ```
 
