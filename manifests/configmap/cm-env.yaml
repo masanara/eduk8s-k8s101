@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: cm-env
+  name: cm-env
+spec:
+  containers:
+  - image: quay.io/mnara/ubuntu:latest
+    name: ubuntu
+    command: ["sleep", "36000"]
+    envFrom:
+    - configMapRef:
+        name: message

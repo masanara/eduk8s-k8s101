@@ -42,12 +42,17 @@ cd manifests && cat ingress2.yaml
 
 
 ```execute
-cd manifests
 sed -i 's/hostname/{{ session_namespace }}.nginx.{{ ingress_domain }}/g' ingress2.yaml
 ```
 
 ```execute
-cd $HOME && kubectl apply -f  manifests/ingress2.yaml
+cd $HOME && kubectl create -f manifests/ingress2.yaml
+```
+
+Ingressリソースが存在することを確認します。
+
+```execute
+kubectl get ingress
 ```
 
 ブラウザで以下のURLにアクセスし両方のPodにアクセスできていることを確認します。
