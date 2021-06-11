@@ -10,12 +10,43 @@ Secretの作成
 cd $HOME/manifests/secret && cat db-cred.yaml
 ```
 
-```DB_HOST, DB_USER, DB_PASSWORD``` の値はbase64でエンコードされています。base64でデコードすると各値を取得することが可能です。
+```DB_Host, DB_User, DB_Password``` の値はbase64でエンコードされています。base64でデコードすると各値を取得することが可能です。
 
+
+- DB_Hostの値
 
 ```execute
-echo bXlzcWw= | base64 -d
+echo bXlzcWwtMQ== | base64 -d
+```
+
+- DB_Userの値
+
+```execute
 echo cm9vdA== | base64 -d
+```
+
+- DB_Passwordの値
+
+```execute
+echo cGFzc3dvcmQxMjM= | base64 -d
+```
+
+Secretには[8つの種類があります](https://kubernetes.io/ja/docs/concepts/configuration/secret/#secret-types)。種類を指定しない場合、Opaque(geenric)が選択されます。一般的なデータを格納する場合はOpaqueを利用します。
+
+
+マニフェストを利用してSecretを作成します。
+
+```execute
+kubectl create -f db-cred.yaml
+```
+
+以下のようにkubectllでsecretを作成することも可能です。
+
+```
+kubectl create secret generic db-cred --from-literal=DB_Host=mysql --from-literal=DB_User=root --from-literal=DB_Password=password123
+```
+
+Secretが作成されたことを確認します。
 echo cGFzc3dvcmQxMjM= | base64 -d
 ```
 
@@ -31,7 +62,7 @@ kubectl creaty -f db-cred.yaml
 以下のようにkubectllでsecretを作成することも可能です。
 
 ```
-kubectl create secret generic db-cred --from-literal=DB_HOST=mysql --from-literal=DB_USER=root --from-literal=DB_PASSWORD=password123
+kubectl create secret generic db-cred --from-literal=DB_Host=mysql-1 --from-literal=DB_User=root --from-literal=DB_Password=password123
 ```
 
 Secretが作成されたことを確認します。
@@ -40,4 +71,54 @@ Secretが作成されたことを確認します。
 kubectl get secret
 ```
 
+Secretを利用するmysql podを起動します。podを作成するためのマニフェストを確認します。
 
+```
+cat mysql.yaml
+```
+
+このマニフェストでは、SecretのDB_Passwordの値を環境変数MYSQL_ROOT_PASSWORDとして設定するPodをDeploymenとして起動し、mysql-1というServiceによりClusterIPでクラスター内のアクセス可能にします。
+
+```
+kubectl create mysql.yaml
+```
+
+Podが起動し、Serviceが作成されたことを確認します。
+
+```
+kubectl get pod,svc
+```
+
+次にデータベースにアクセスするWebアプリケーションをデプロイします。Webアプリケーションは環境変数としてDB_Host, DB_User, DB_Passwordを利用してmysqlに接続確認するだけのシンプルなものです。また、Service(LoadBalancer)により外部からのアクセスを可能にします。マニフェストの内容を確認してみます。
+
+
+```
+cat webapp.yaml
+```
+
+```.spec.template.spec.containers[].envFrom``` でsecretを参照して内容を管渠変数として設定しています。
+
+マニフェストをデプロイします。
+
+```
+kubectl apply -f webapp.yaml
+```
+
+PodとServiceが作成されたことを確認し、webapp ServiceのEXTERNAL-IPを確認し、ブラウザでアクセスします。webappはDBへの接続結果を表示します。画面が緑色になって接続が成功したことを確認します。
+
+
+#### 応用
+
+以下のコマンドでdb-cred1 Secretを新たに作成します。
+
+```
+kubectl create secret generic db-cred1 --from-literal=DB_Host=mysql-1 --from-literal=DB_User=root --from-literal=DB_Password=password123
+```
+
+Webapp Deploymentが参照しているSecretを新しいマニフェストに変更すると、Podが再作成されます。再作成されたPodにLoadBalancer Service経由でアクセスしてMySQLへの接続に失敗することを確認します。
+
+この章の演習が終わったら作成したすべてのリソースを削除します。
+
+```
+kubectl delete -f $HOME/manifests/secret/
+```

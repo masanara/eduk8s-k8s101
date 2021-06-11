@@ -31,7 +31,7 @@ modules:
     exercises/14-configmap:
         name: ConfigMapリソース
     exercises/15-secret:
-        name: リソース
+        name: Secretリソース
     exercises/16-volume:
         name: Volume
     exercises/18-secret:
