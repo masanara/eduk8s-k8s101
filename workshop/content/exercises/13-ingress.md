@@ -1,7 +1,7 @@
 ingressリソースのマニフェストテンプレートの内容を確認します。
 
 ```execute
-cd manifests && cat ingress.yaml
+cd $HOME/manifests && cat ingress.yaml
 ```
 
 ```.spec.rules.host[0]``` には、 hostname という値が仮で入っているため、これを環境に合わせて変更します。
@@ -11,7 +11,7 @@ cd manifests && cat ingress.yaml
 sed -i 's/hostname/{{ session_namespace }}.nginx.{{ ingress_domain }}/g' ingress.yaml
 ```
 ```execute
-cd $HOME && kubectl create -f manifests/ingress.yaml
+kubectl create -f ingress.yaml
 ```
 
 ```execute
@@ -35,7 +35,7 @@ kubectl get service
 ingressリソースのマニフェストテンプレートの内容を確認します。アクセス先(/n1, /n2)に応じて、nginx1-svc、nginx2-svcにアクセス先が変わる設定になっています。
 
 ```execute
-cd manifests && cat ingress2.yaml
+cat ingress2.yaml
 ```
 
 ```.spec.rules.host[0]``` には、 hostname という値が仮で入っているため、これを環境に合わせて変更します。
@@ -46,7 +46,7 @@ sed -i 's/hostname/{{ session_namespace }}.nginx.{{ ingress_domain }}/g' ingress
 ```
 
 ```execute
-cd $HOME && kubectl create -f manifests/ingress2.yaml
+kubectl create -f ingress2.yaml
 ```
 
 Ingressリソースが存在することを確認します。

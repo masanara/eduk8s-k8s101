@@ -5,17 +5,18 @@ StatefulSetはステートフルな状態を扱う、データベースなどの
 簡単なDeploymentのサンプルを動作させます。まず下記のようなdeployment.yamlを作成します。
 
 ```execute
-cat manifests/statefulset.yaml
+cd $HOME/manifests
+cat statefulset.yaml
 ```
 
-各フィールドについては、次に説明しますが詳細は[こちら](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#statefulset-v1-apps)をご覧ください。
+各フィールドについては[こちら](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/stateful-set-v1/)をご覧ください。
 
 - spec.serviceNameは、StatefulSetのPodを対象としているServiceの名前を指定する。このフィールドで指定されるServiceはStatefulSetが作成されるよりも先に作成される必要があります。
 
 作成したマニフェストファイルからStatefulSetを作成してみましょう。kubectl applyコマンドを実行します。
 
 ```execute
-kubectl apply -f manifests/statefulset.yaml
+kubectl apply -f statefulset.yaml
 ```
 
 Podが起動しているかを確認してみます。確認方法は、kubectl get コマンドを実行します。STATUSがRunningとなっていれば正しく起動できています。replicasetとは異なり、statefulsetではインデックスが付与されています。

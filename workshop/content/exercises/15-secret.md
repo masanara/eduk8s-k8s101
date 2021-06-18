@@ -106,5 +106,5 @@ Webapp Deploymentが参照しているSecretを新しいマニフェストに変
 この章の演習が終わったら作成したすべてのリソースを削除します。
 
 ```execute
-kubectl delete -f $HOME/manifests/secret/
+kubectl delete -f .
 ```

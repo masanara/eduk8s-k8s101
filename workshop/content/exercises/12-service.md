@@ -3,13 +3,14 @@ Serivceによりpodに対するアクセスができることを確認します�
 作成済みのDeployment(nginx2)に対するServiceを構成するためのマニフェストを確認します。
 
 ```execute
-cat manifests/nginx2-svc.yaml
+cd $HOME/manifests
+cat nginx2-svc.yaml
 ```
 
 nginx2 podに対するserviceを作成します。
 
 ```execute
-kubectl apply -f manifests/nginx2-svc.yaml
+kubectl apply -f nginx2-svc.yaml
 ```
 
 作成されたSerfviceを確認します。

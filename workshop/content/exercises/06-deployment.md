@@ -3,34 +3,17 @@ Deploymentは、Podのローリングアップデートやロールバックを�
 manifests/deployment.yamlの内容を確認します。
 
 ```execute
-cat manifests/deployment.yaml
+cd $HOME/manifests && cat deployment.yaml
 ```
 
-各フィールドについては、次に説明しますが詳細は[こちら](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)をご覧ください。
-
-- apiVersion : Deploymentというリソースに対するバージョンを指定しています。
-- kind : 作成するリソースを指定します。今回はDeploymentを作成するため、Deploymentを指定しています。
-- metadata : 作成するリソースに対して名前の設定します。
-  -  matadata.name : 作成したリソースに対する名前を指定します。今回は、nginxのコンテナイメージを使ったpodということでnginxという名前を指定しています。
-- specはkindで指定されたリソースに対する具体的な設定を指定します。 
-  - spec.strategy : 古いPodを新しいPodに置き換えるための戦略を指定します。
-    - spec.strategy.type : RollingUpdateのときには、Podをローリングアップデートで更新します。
-    - spec.strategy.rollingUpdate : maxUnavailableとmaxSurgeを指定してローリングアップデートプロセスを制御することができます。
-      - spec.strategy.rollingUpdate.maxUnavailable : 更新処理中に利用できないPodの最大数を指定するオプションのフィールドです。値は絶対数もしくはパーセンテージで制>御することができます。 絶対数は、切り捨てによる割合から計算されます。 
-      - spec.strategy.rollingUpdate.maxSurge : 0の場合、値は0にできません。デフォルト値は25％です。
-      - spec.strategy.rollingUpdate.maxSurgeは、必要な数のPod上に作成できるポッドの最大数を指定するオプションのフィールドです。値は絶対数もしくはパーセンテージで制御することができます。 絶対数は、切り捨てによる割合から計算されます。 
-      - spec.strategy.rollingUpdate.maxSurgeが0の場合、値は0にできません。デフォルト値は25％です。
-  - spec.replicas : ReplicaSet内でPodの複製数を指定します。今回は3として記述したため3つのPodが複製されます。
-  - spec.selector : ReplicaSetが監視を行うPodの情報の設定を行います。
-    - spec.selector.matchLabels : 監視対象のPodをkey: valueの形式で指定します。
-  - spec.template : ReplicaSetが複製するPodの情報の設定を行います。
+マニフェストの各フィールドの詳細は[こちら](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)をご覧ください。
 
 # Deploymentの作成
 
 確認したマニフェストファイルからDeploymentを作成してみます。kubectl creatコマンドを実行します。
 
 ```execute
-kubectl apply -f manifests/deployment.yaml
+kubectl apply -f deployment.yaml
 ```
 
 Podが起動しているかを確認してみます。確認方法は、kubectl get コマンドを実行します。STATUSがRunningとなっていれば正しく起動できています。
