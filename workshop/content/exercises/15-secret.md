@@ -10,7 +10,7 @@ Secretの作成
 cd $HOME/manifests/secret && cat db-cred.yaml
 ```
 
-```DB_Host, DB_User, DB_Password``` の値はbase64でエンコードされています。base64でデコードすると各値を取得することが可能です。
+```DB_Host, DB_User, DB_Password``` の値はbase64でエンコードされています。base64でデコードすると各値を取得することが可能です。(デコードされる文字列のあとに改行コードが無いため、デコード結果の後にコマンドプロンプトが表示されます)
 
 
 - DB_Hostの値
@@ -77,7 +77,7 @@ kubectl get pod,svc
 cat webapp.yaml
 ```
 
-```.spec.template.spec.containers[].envFrom``` でsecretを参照して内容を管渠変数として設定しています。
+```.spec.template.spec.containers[].envFrom``` でsecretを参照して内容を環境変数として設定しています。
 
 マニフェストをデプロイします。
 
@@ -101,7 +101,7 @@ kubectl get pod,svc
 kubectl create secret generic db-cred1 --from-literal=DB_Host=mysql-1 --from-literal=DB_User=root --from-literal=DB_Password=password
 ```
 
-Webapp Deploymentが参照しているSecretを新しいマニフェストに変更すると、Podが再作成されます。再作成されたPodにLoadBalancer Service経由でアクセスしてMySQLへの接続に失敗することを確認します。
+Webapp Deploymentが参照しているSecretを新しく作成した```db-cred1``` に変更すると、Podが再作成されます。再作成されたPodにLoadBalancer Service経由でアクセスしてMySQLへの接続に失敗することを確認します。
 
 この章の演習が終わったら作成したすべてのリソースを削除します。
 

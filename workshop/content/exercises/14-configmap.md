@@ -40,6 +40,12 @@ cat cm-env.yaml
 kubectl create -f cm-env.yaml
 ```
 
+PodがRunningになることを確認します。
+
+```execute
+kubectl get pod
+```
+
 Pod内の環境変数 ```${MESSAGE}``` がConfigMapに指定した文字列であることを確認します。
 
 ```execute
@@ -52,7 +58,15 @@ kubectl patchコマンドでConfigMapのデータを変更します。
 kubectl patch cm message -p '{"data":{"MESSAGE": "HELLO, WORLD!"}}'
 ```
 
+ConfigMapのMESSAGEが修正した文字列になったことを確認します。
+
+```execute
+kubectl describe cm message
+```
+
 ConfigMapの変更はすぐに反映されますが、Podは起動時にConfigMapを参照するため、新しいConfigMapは反映されません。新しいConfigMapを利用するにはPodを再作成します。
+
+> 通常Podの終了にはSIGTERMシグナルが利用されますが、```--force --grace-period=0```オプションによりSIGKILLシグナルが利用され、Podが即座に強制終了されます。
 
 ```execute
 kubectl delete -f cm-env.yaml --force --grace-period=0

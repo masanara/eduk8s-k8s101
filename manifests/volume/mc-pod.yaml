@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mc-pod
+  name: mc-pod
+spec:
+  containers:
+  - name: ubuntu1
+    image: quay.io/mnara/ubuntu
+    command: ["sleep", "36000"]
+  - name: ubuntu2
+    image: quay.io/mnara/ubuntu
+    command: ["sleep", "36000"]

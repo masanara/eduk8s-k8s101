@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mc-pod-with-vol
+  name: mc-pod-with-vol
+spec:
+  containers:
+  - name: ubuntu1
+    image: quay.io/mnara/ubuntu
+    command: ["sleep", "36000"]
+    volumeMounts:
+    - mountPath: /mount1
+      name: share
+  - name: ubuntu2
+    image: quay.io/mnara/ubuntu
+    command: ["sleep", "36000"]
+    volumeMounts:
+    - mountPath: /mount2
+      name: share
+  volumes:
+  - name: share
+    emptyDir: {}

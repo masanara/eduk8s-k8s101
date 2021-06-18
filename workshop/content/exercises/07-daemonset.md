@@ -28,3 +28,9 @@ kubectl get node -o wide
 ```execute
 kubectl get pods -o wide
 ```
+
+作成したDaemonSetリソースを削除します。
+
+```execute
+kubectl delete -f daemonset.yaml
+```

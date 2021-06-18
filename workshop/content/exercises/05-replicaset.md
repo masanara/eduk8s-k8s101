@@ -77,3 +77,9 @@ replicasets                       rs           extensions                     tr
 podsecuritypolicies               psp          policy                         false        PodSecurityPolicy
 ```
 
+作成したReplicaSetリソースを削除します。
+
+
+```execute
+kubectl deleete -f replicaset.yaml
+```
