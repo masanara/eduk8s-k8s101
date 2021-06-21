@@ -3,20 +3,18 @@
 - Kubernertesとは
 - kubernetesのコンポーネント
 - Kubeernetesのリソース
-  - Pod
-  - ReplicaSet
-  - Deployment
-  - DaemonSet
-  - StatefulSet
-  - Job (作成中)
-  - CronJob (作成中)
+  - Podリソース
+  - ReplicaSetリソース
+  - Deploymentリソース
+  - DaemonSetリソース
+  - StatefulSetリソース
 - Kubernetesのネットワーク
-  - Pod感通信 (作成中)
-  - Serviceリソース (作成中)
-  - Ingressリソース (作成中)
+  - Pod間ネットワーク
+  - Serviceリソース
+  - Ingressリソース
 - 各種情報の分離
-  - ConfigMapリソース (作成中)
-  - Secretリソース (作成中)
+  - ConfigMapリソース
+  - Secretリソース
 - Kubernetesのストレージ
-  - Volumeマウント (作成中)
-  - PVC/PVリソース (作成中)
+  - Volumeリソース
+  - PersistentVolumeClaimリソース

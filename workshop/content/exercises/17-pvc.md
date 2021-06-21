@@ -104,7 +104,7 @@ kubectl get svc
 dateコマンドの結果をindex.htmlとして保存します。
 
 ```execute
-kubectl exec nginx-pod -- sh -c 'date > /usr/share/nginx/html/index.html
+kubectl exec nginx-pod -- sh -c 'date > /usr/share/nginx/html/index.html'
 ```
 
 ブラウザで再度EXTERNAL-IPにアクセスすると、dateコマンドの出力結果を確認することが可能です。
@@ -124,9 +124,15 @@ kubectl get pvc
 同じマニフェストでpodを再作成して、serviceのEXTERNAL-IPを確認します。
 
 ```execute
-kubectl applly -f pod-with-pvc.yaml
+kubectl apply -f pod-with-pvc.yaml
 kubectl get pod,svc
 ```
 
 ブラウザでEXTERNAL-IPにアクセスすると、前回アクセスしたときと同じdateコマンドの出力結果が表示されます。Podを削除しても、PV上のデータが永続化されているためです。
 
+
+このセクションで作成したリソースを削除します。
+
+```execute
+kubectl delete -f .
+```

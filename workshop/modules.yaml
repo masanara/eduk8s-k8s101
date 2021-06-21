@@ -12,7 +12,7 @@ modules:
         name: Podリソース
     exercises/05-replicaset:
         name: ReplicaSetリソース
-    exercises/06-deploymetn:
+    exercises/06-deployment:
         name: Deploymentリソース
     exercises/07-daemonset:
         name: DaemonSetリソース
