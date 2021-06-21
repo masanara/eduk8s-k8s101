@@ -45,13 +45,17 @@ nginx2-svcに対するアクセスを繰り返して、異なるnginx2 podに負
 kubectl exec -it $(kubectl get po -l app=nginx1 -o=jsonpath='{.items[].metadata.name}') -- curl nginx2-svc
 ```
 
-
-ここまでで、クラスター内のアクセスにServiceを利用することができました。
+ここまでで、クラスター内のアクセスにServiceを利用することができました。次にクラスター外部からアクセスができるServiceを作成します。クラスターの外部からアクセス可能なServiceは```type: LoadBalancer```として作成します。kubectlコマンドでは以下のようにオプションを付与することでServiceを作成可能です。
+```type: LoadBalancer```は外部のロードバランサーと連携し、Serviveを作成すると外部でロードバランサーが構成され、クラスター外部からアクセス可能な仮想IPアドレスが割り当てられます。
 
 ```execute
 kubectl expose deploy nginx2 --name=nginx2-lb --port=80 --type=LoadBalancer
 ```
 
+作成されたServieを確認します。nginx2-lbのEXTERNAL-IPが```<pending>```の場合はしばらく待って、何度化確認するとLoadBalancerのIPのアドレスが払い出されます。
+
 ```execute
 kubectl get service
 ```
+
+確認したEXTERNAL-IPにアクセスすると、nginx podにアクセスできることが確認できます。

@@ -1,9 +1,7 @@
 StatefulSetはステートフルな状態を扱う、データベースなどのワークロードに対応するリソースです。ReplicaSetに似ていますが、Podに対してPersistentVolumeを追加できる点やPod名にインデックスを付与することができます。
 
 別の章で詳しく説明しますが、コンテナのデータは一時的なもので、Pod/コンテナが削除されればデータが消えてしまいます。また、コンテナが一時的な障害が発生してKubernetesが再起動させた場合も同様にデータが削除されます。これに対応した機能として、KubernetesではPodで保存したデータを保持する機能があります（また別の章で紹介します）。
-
-簡単なDeploymentのサンプルを動作させます。まず下記のようなdeployment.yamlを作成します。
-
+簡単なDeploymentのサンプルを動作させます。まず下記のようなdeployment.yamlを作成します。 
 ```execute
 cd $HOME/manifests
 cat statefulset.yaml
@@ -49,3 +47,9 @@ kubectl get pod
 
 ![file](images/statefulset.png)
 
+
+このセクションで作成したリソースを削除します。
+
+```execute
+kubectl delete -f statefulset.yaml
+```

@@ -46,7 +46,7 @@ sed -i 's/hostname/{{ session_namespace }}.nginx.{{ ingress_domain }}/g' ingress
 ```
 
 ```execute
-kubectl create -f ingress2.yaml
+kubectl apply -f ingress2.yaml
 ```
 
 Ingressリソースが存在することを確認します。
@@ -60,3 +60,10 @@ kubectl get ingress
 - [{{ ingress_protocol }}://{{ session_namespace }}.nginx.{{ ingress_domain }}/n1]({{ ingress_protocol }}://{{ session_namespace }}.nginx.{{ ingress_domain }}/n1)
 - [{{ ingress_protocol }}://{{ session_namespace }}.nginx.{{ ingress_domain }}/n2]({{ ingress_protocol }}://{{ session_namespace }}.nginx.{{ ingress_domain }}/n2)
 
+ここまでのセクションで作成したリソースを削除します。
+
+```execute
+kubectl delete deploy nginx1 nginx2
+kubectl delete svc nginx1-svc nginx2-lb nginx2-svc
+kubectl delete ingress nginx
+```

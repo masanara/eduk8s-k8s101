@@ -25,7 +25,7 @@ Deploymentで動作しているコンテナイメージを、nginx:1.20からngi
 今回は、イメージの更新にkubectl set imageコマンドを実行します。
 
 ```execute
-kubectl set image deployment deployment-container nginx=quay.io/mnara/nginx:1.21
+kubectl set image deployment nginx-deployment nginx=quay.io/mnara/nginx:1.21
 ```
 
 kubectl getコマンドを実行して、Podの状況を確認します。実行結果から、Podの数が4つ動作していることが確認できます。
@@ -37,7 +37,7 @@ kubectl get pods
 kubectl rollout status コマンドを使用することで、ロールアウトのステータスを確認することができます。たとえば、次のコマンドを実行して、nginx Deployment のロールアウトの状況を確認することができます。
 
 ```execute
-kubectl rollout status deployment deployment-container
+kubectl rollout status deployment nginx-deployment
 ```
 
 次にPodのロールバックを行います。今回は、Deploymentで動作しているコンテナイメージをquay.io/mnara/nginx:1.21から1.20にロールバックします。
@@ -47,14 +47,14 @@ kubectl rollout status deployment deployment-container
 CHANGE-CAUSEの部分は、deployment作成時に、 ```--record``` オプションを渡した場合に記載されます。 ```--record``` オプションを用いなかった場合には空になります。
 
 ```execute
-kubectl rollout history deployment deployment-container
+kubectl rollout history deployment nginx-deployment
 ```
 
 ロールバックするには、kubectl rollout undoコマンドを利用します。
 引数でrevision番号を指定することができます。
 
 ```execute
-kubectl rollout undo deployment deployment-container --to-revision 1
+kubectl rollout undo deployment nginx-deployment --to-revision 1
 ```
 
 では、ロールバックができているかを確認します。yamlファイルの内容から、古いバージョンのnginxが動作していることが確認できます。
