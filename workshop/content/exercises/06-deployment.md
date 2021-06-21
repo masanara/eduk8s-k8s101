@@ -1,6 +1,6 @@
 Deploymentは、Podのローリングアップデートやロールバックを実現するリソースです。DeploymentがReplicaSetを管理し、ReplicaSetがPodを管理する3層の親子関係となっています。
 
-manifests/deployment.yamlの内容を確認します。
+manifests/deploy.yamlの内容を確認します。
 
 ```execute
 cd $HOME/manifests && cat deployment.yaml
@@ -8,9 +8,7 @@ cd $HOME/manifests && cat deployment.yaml
 
 マニフェストの各フィールドの詳細は[こちら](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)をご覧ください。
 
-# Deploymentの作成
-
-確認したマニフェストファイルからDeploymentを作成してみます。kubectl creatコマンドを実行します。
+確認したマニフェストファイルからDeploymentを作成します。kubectl creatコマンドを実行します。
 
 ```execute
 kubectl apply -f deployment.yaml
@@ -65,4 +63,4 @@ kubectl rollout undo deployment deployment-container --to-revision 1
 kubectl get $(kubectl get pod -o name | head -n1 ) -o yaml | grep "image: nginx"
 ```
 
-実行結果から、nginxのバージョンが1.20となっていることが確認できます。しかしながら、実際にはこのロールバック機能を使用することは多くありません。ほとんどの場合では、作成されているマニフェストファイルを編集し、kubectl applyコマンドを実行します。動作状態に直接変更を加えてしまうと、構成状況の把握が困難になるためです。
+実行結果から、nginxのバージョンが1.20となっていることが確認できます。しかし、実際にはこのロールバック機能を使用することは多くありません。ほとんどの場合では、作成されているマニフェストファイルを編集し、kubectl applyコマンドを実行します。動作状態に直接変更を加えてしまうと、構成状況の把握が困難になるためです。
