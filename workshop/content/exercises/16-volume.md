@@ -7,7 +7,7 @@ Volumeにはいくつかの種類があります。ボリュームの種類や�
 - csi : CSI(Container Storage Interface)を利用して外部のストレージシステムを利用
 - nfs : NFSサーバーが公開している領域をVolumeとして利用
 
-#### emptyDirの利用
+### emptyDirの利用
 
 Pod内で複数のコンテナを起動し、Pod間でファイルシステムを共有したい場合、emptyDirと呼ばれるvolumeを利用してデータを共有することが可能です。emptyDir volumeは揮発性があり、Podを削除すると同時に削除されるためデータの永続化はできませんが、Pod内のコンテナ間でデータを共有したい場合などに利用可能です。
 
@@ -55,6 +55,12 @@ kubectl exec mc-pod -c ubuntu2 -- /bin/sh -c 'cat /tmp/date'
 
 ```execute
 cat mc-pod-with-vol.yaml
+```
+
+emptyDirを利用するpodを作成します。
+
+```execute
+kubectl create -f mc-pod-with-vol.yaml
 ```
 
 mc-pod-with-vol podが起動したことを確認します。

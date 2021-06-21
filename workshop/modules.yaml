@@ -33,9 +33,9 @@ modules:
     exercises/15-secret:
         name: Secretリソース
     exercises/16-volume:
-        name: Volume
-    exercises/18-secret:
-        name: PVC/PVリソース
+        name: Volumeリソース
+    exercises/17-pvc:
+        name: PersistentVolumeClaimリソース
     workshop-summary:
         name: Workshop Summary
         exit_sign: Finish Workshop
