@@ -1,0 +1,28 @@
+apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+kind: Workshop
+metadata:
+  name: kubernetes101
+spec:
+  title: kubernetes Hands-on
+  description: kubernetes hands-on
+  vendor: eduk8s.io
+  difficulty: beginner
+  duration: 60m
+  url: https://github.com/masanara/eduk8s-k8s101
+  content:
+    image: harbor.nsx.techlab.netone.co.jp/library/eduk8s:0.5
+    files: github.com/masanara/eduk8s-k8s101
+  session:
+    namespaces:
+      budget: xx-large
+      limits:
+        defaultRequest:
+          cpu: 50m
+          memory: 128Mi
+        default:
+          cpu: 500m
+          memory: 1Gi
+    applications:
+      terminal:
+        enabled: true
+
